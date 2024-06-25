@@ -43,7 +43,7 @@ def main():
         X, y, test_size=0.2, shuffle=False)
 
     from keras.models import Sequential
-    from keras.layers import LSTM, Dense, Dropout
+    from keras.layers import LSTM, Dense
 
     model = Sequential()
 
