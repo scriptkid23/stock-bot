@@ -13,10 +13,7 @@ def main():
 
     datasets = vni[::-1]
 
-    print(datasets)
     feature_data = datasets[['Open', 'High', 'Low', 'Close']].values
-
-    print(feature_data)
 
     from sklearn.preprocessing import MinMaxScaler
 
@@ -42,7 +39,6 @@ def main():
 
     X, y = np.array(X), np.array(y)
 
-    print("X:", X, "y:", y)
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, shuffle=False)
 
@@ -71,13 +67,10 @@ def main():
 
     print("loss is {} and mae is {}".format(loss, mae))
 
-    
     predicted = model.predict(X_test)
 
     predicted = scaler.inverse_transform(predicted)
 
-    print(predicted)
-    
     y_test = scaler.inverse_transform(y_test)
 
     model.save('./lstm_model.keras')

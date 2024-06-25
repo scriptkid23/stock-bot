@@ -49,4 +49,4 @@ predicted_scaled = model.predict(X_test)
 
 predicted = scaler.inverse_transform(predicted_scaled)
 
-print("Predicted Value for June 25, 2024:\n", predicted[0])
+print("Predicted Value for June 26, 2024:\n", predicted[0])
