@@ -27,7 +27,7 @@ def main():
 
     import numpy as np
 
-    time_steps = 5  # the number of lookback
+    time_steps = 6  # the number of lookback
     num_features = 4  # the number of feature (close and volumes)
 
     X = []
@@ -47,7 +47,7 @@ def main():
 
     model = Sequential()
 
-    model.add(LSTM(units=256, activation='relu', return_sequences=True,
+    model.add(LSTM(units=200, activation='relu', return_sequences=True,
                    input_shape=(time_steps, num_features)))
 
     model.add(LSTM(units=100, return_sequences=False))
