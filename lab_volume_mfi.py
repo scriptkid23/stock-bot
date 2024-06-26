@@ -7,14 +7,14 @@ import mplfinance as mpf
 # Tạo một DataFrame từ dữ liệu giá trị
 from vnstock3 import Vnstock
 
-stock = Vnstock().stock(symbol='MWG', source='TCBS')
+stock = Vnstock().stock(symbol='VHM', source='TCBS')
 
 for i in stock.company.events()['event_desc']:
     print(i)
 
 print('Company: {}'.format(stock.company.profile()['company_name']))
 
-data = stock.quote.history(start='2018-05-17', end='2024-06-25')
+data = stock.quote.history(start='2018-05-17', end='2024-06-26')
 
 data['time'] = pd.to_datetime(data['time'])
 

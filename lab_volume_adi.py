@@ -5,7 +5,7 @@ import mplfinance as mpf
 import ta
 from vnstock3 import Vnstock
 
-stock = Vnstock().stock(symbol='VPB', source='TCBS')
+stock = Vnstock().stock(symbol='VHM', source='TCBS')
 
 
 data = stock.quote.history(start='2018-05-17', end='2024-06-26')
