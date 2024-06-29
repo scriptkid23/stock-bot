@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 import scipy
-from directional_change import directional_change, get_extremes
+from analystic.directional_change import directional_change, get_extremes
 from dataclasses import dataclass
 from typing import Union
 from math import log
@@ -94,6 +94,8 @@ def get_error(actual_ratio: float, pattern_ratio: Union[float, list, None]):
      
     if pattern_ratio is None: # No requirement (Shark)
         return 0.0
+
+    if actual_ratio == 0.0: return 0.0
 
     log_actual = log(actual_ratio)
 
@@ -220,8 +222,7 @@ def find_xabcd(ohlc: pd.DataFrame, extremes: pd.DataFrame, err_thresh: float = 0
     return output
 
 
-if __name__ == '__main__':
-    data = pd.read_csv('BTCUSDT3600.csv')
+def prepare(data: pd.DataFrame):
     data['date'] = data['date'].astype('datetime64[s]')
     data = data.set_index('date')
     #data = data[data.index < '2019-01-01']
@@ -247,6 +248,7 @@ if __name__ == '__main__':
     lose_returns = data[data['combined_returns'] < 0]['combined_returns'].abs().sum() 
     combined_pf = win_returns / lose_returns
     print("Combined PF", combined_pf)
+    return combined_pf
     
 
     '''

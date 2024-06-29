@@ -2,9 +2,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import mplfinance as mpf
-from perceptually_important import find_pips
-from rolling_window import rw_top, rw_bottom
-from trendline_automation import fit_trendlines_single
+
+from analystic.perceptually_important import find_pips
+from analystic.rolling_window import rw_top, rw_bottom
+from analystic.trendline_automation import fit_trendlines_single
 from dataclasses import dataclass
 
 @dataclass
@@ -399,11 +400,14 @@ def plot_flag(candle_data: pd.DataFrame, pattern: FlagPattern, pad=2):
     upper_line = [(tip_idx, pattern.resist_intercept), (conf_idx, pattern.resist_intercept + pattern.resist_slope * pattern.flag_width)]
     lower_line = [(tip_idx, pattern.support_intercept), (conf_idx, pattern.support_intercept + pattern.support_slope * pattern.flag_width)]
 
+    print(dat)
     mpf.plot(dat, alines=dict(alines=[pole_line, upper_line, lower_line], colors=['w', 'b', 'b']), type='candle', style='charles', ax=ax)
     plt.show()
 
-if __name__ == '__main__':
-    data = pd.read_csv('BTCUSDT3600.csv')
+
+
+def prepare(data: pd.DataFrame):
+ 
     data['date'] = data['date'].astype('datetime64[s]')
     data = data.set_index('date')
 
@@ -475,15 +479,4 @@ if __name__ == '__main__':
             ret = -1 * (dat_slice[pennant.conf_x + hp] - dat_slice[pennant.conf_x])
             bear_pennant_df.loc[i, 'return'] = ret 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    return data, bull_flags, bear_flags, bull_pennants, bear_pennants

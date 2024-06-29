@@ -117,10 +117,10 @@ def fit_trendlines_high_low(high: np.array, low: np.array, close: np.array):
     return (support_coefs, resist_coefs)
 
 
-if __name__ == '__main__':
+def prepare(data: pd.DataFrame):
 
     # Load data
-    data = pd.read_csv('BTCUSDT86400.csv')
+ 
     data['date'] = data['date'].astype('datetime64[s]')
     data = data.set_index('date')
 
